@@ -1,0 +1,43 @@
+---
+title: "Bitcoin Outlook: April 2026 – April 2027"
+author: "Hans Dong"
+date: "2026-04-08"
+format:
+  revealjs:
+    theme: moon
+    transition: fade
+    embed-resources: true
+    slide-number: true
+---
+
+## Current Market Context (April 2026)
+
+As of today, Bitcoin is trading around **$71,100**. We are roughly two years post-2024 halving, moving into what historically is the "maturation" phase of the cycle.
+
+* **Support Levels:** Strong institutional floor established at $65,000.
+* **Institutional Flow:** Spot ETFs now account for a significant portion of daily liquidity.
+* **Macro Environment:** Inflation is stabilizing, but central bank pivot expectations remain the primary driver for "risk-on" assets.
+
+---
+
+## The Next 12 Months: Key Drivers
+
+The path to **April 2027** will likely be defined by three major factors:
+
+1.  **Supply Scarcity:** The cumulative effect of the 2024 halving combined with corporate treasury adoption (the "MicroStrategy effect").
+2.  **Regulatory Clarity:** Global frameworks (like MiCA in Europe) are providing the "green light" for sovereign wealth fund entry.
+3.  **The Halving Cycle:** Historically, the year *before* a halving (2027 leads into 2028) often sees a mid-cycle consolidation before the pre-halving run-up.
+
+---
+
+## Price Prediction: April 2027
+
+Based on current technical indicators and adoption curves, we anticipate a period of **high-level consolidation** with an upward bias.
+
+| Scenario | Target Price (Apr 2027) | Probability |
+|----------|-------------------------|-------------|
+| **Bullish** | $120,000 - $145,000 | 30% |
+| **Base Case**| $85,000 - $95,000 | 55% |
+| **Bearish** | $50,000 - $60,000 | 15% |
+
+> **Bottom Line:** We expect Bitcoin to break the six-figure barrier ($100k) briefly in late 2026, followed by a healthy correction to the **$90k range** by early 2027.

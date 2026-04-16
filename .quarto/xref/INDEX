@@ -1,0 +1,23 @@
+{
+  "about.qmd": {
+    "about.html": "ffcd5254"
+  },
+  "index.qmd": {
+    "index.html": "cdf94b8f"
+  },
+  "resume.qmd": {
+    "resume.html": "de9cb304"
+  },
+  "projects.qmd": {
+    "projects.html": "64c62eda"
+  },
+  "projects/project1/index.qmd": {
+    "index.html": "1f465711"
+  },
+  "projects/project2/index.qmd": {
+    "index.html": "763a1afe"
+  },
+  "bitcoin.qmd": {
+    "bitcoin.html": "cb2d630d"
+  }
+}
