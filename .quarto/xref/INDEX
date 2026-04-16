@@ -19,5 +19,8 @@
   },
   "bitcoin.qmd": {
     "bitcoin.html": "cb2d630d"
+  },
+  "projects/hw1/index.qmd": {
+    "index.html": "420039db"
   }
 }
