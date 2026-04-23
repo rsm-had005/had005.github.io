@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Hans Dong">
+<meta name="dcterms.date" content="2026-04-22">
 
-<title>My Projects – Hans’s Website</title>
+<title>Replication of Karlan and List (2007) – Hans’s Website</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,25 +28,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -72,67 +72,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-title','listing-author','listing-date','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -142,7 +84,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Hans’s Website</span>
     </a>
   </div>
@@ -153,19 +95,19 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./resume.html"> 
+    <a class="nav-link" href="../../resume.html"> 
 <span class="menu-text">Resume</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./projects.html" aria-current="page"> 
+    <a class="nav-link" href="../../projects.html"> 
 <span class="menu-text">Projects</span></a>
   </li>  
 </ul>
@@ -179,22 +121,53 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#main-analysis" id="toc-main-analysis" class="nav-link" data-scroll-target="#main-analysis">Main Analysis</a>
+  <ul class="collapse">
+  <li><a href="#table-1-balance-between-treatment-and-control" id="toc-table-1-balance-between-treatment-and-control" class="nav-link" data-scroll-target="#table-1-balance-between-treatment-and-control">Table 1: Balance Between Treatment And Control</a></li>
+  <li><a href="#table-2a-response-rates-and-donation-amounts" id="toc-table-2a-response-rates-and-donation-amounts" class="nav-link" data-scroll-target="#table-2a-response-rates-and-donation-amounts">Table 2A: Response Rates And Donation Amounts</a></li>
+  <li><a href="#table-3-replicating-one-regression-column" id="toc-table-3-replicating-one-regression-column" class="nav-link" data-scroll-target="#table-3-replicating-one-regression-column">Table 3: Replicating One Regression Column</a></li>
+  </ul></li>
+  <li><a href="#something-additional" id="toc-something-additional" class="nav-link" data-scroll-target="#something-additional">Something Additional</a>
+  <ul class="collapse">
+  <li><a href="#why-the-design-supports-a-causal-interpretation" id="toc-why-the-design-supports-a-causal-interpretation" class="nav-link" data-scroll-target="#why-the-design-supports-a-causal-interpretation">Why The Design Supports A Causal Interpretation</a></li>
+  <li><a href="#graphing-part-of-table-2a" id="toc-graphing-part-of-table-2a" class="nav-link" data-scroll-target="#graphing-part-of-table-2a">Graphing Part Of Table 2A</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">My Projects</h1>
+<h1 class="title">Replication of Karlan and List (2007)</h1>
+<p class="subtitle lead">Does Price Matter in Charitable Giving? Evidence from a Large-Scale Natural Field Experiment</p>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Hans Dong </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 22, 2026</p>
+    </div>
+  </div>
   
     
   </div>
@@ -204,91 +177,285 @@ window.Quarto = {
 </header>
 
 
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Dean Karlan and John A. List study whether matching grants increase charitable giving. In their field experiment, a nonprofit mailed fundraising letters to 50,083 prior donors and randomly varied whether the letter mentioned a match, the size of the match ratio, and the suggested donation amount. Because households were randomly assigned to these mailings, differences in outcomes across groups can be interpreted causally rather than as simple correlation. The paper’s main result is that offering any match increases giving, but larger match ratios such as 2:1 or 3:1 do not appear to outperform a 1:1 match.</p>
+<p>This post replicates three parts of the paper using the provided Stata replication data in <code>data/AERtables1-5.dta</code>:</p>
+<ol type="1">
+<li>selected balance checks from Table 1,</li>
+<li>key summaries from Table 2A, and</li>
+<li>one Table 3 treatment-effect regression.</li>
+</ol>
+<p>I also add one extra item: a figure that turns part of Table 2A into a graph.</p>
+<p>Source paper: <a href="https://www.aeaweb.org/articles?id=10.1257/aer.97.5.1774">American Economic Review article page</a>.</p>
+</section>
+<section id="main-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="main-analysis">Main Analysis</h2>
+<section id="table-1-balance-between-treatment-and-control" class="level3">
+<h3 class="anchored" data-anchor-id="table-1-balance-between-treatment-and-control">Table 1: Balance Between Treatment And Control</h3>
+<p>Table 1 is meant to show that the randomization worked. I replicated several of the pretreatment covariates by comparing treatment and control means. The differences are tiny in substantive terms, and none are statistically significant at the 5 percent level.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th style="text-align: right;">Treatment mean</th>
+<th style="text-align: right;">Control mean</th>
+<th style="text-align: right;">Difference</th>
+<th style="text-align: right;">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Republican donor (<code>red0</code>)</td>
+<td style="text-align: right;">0.407</td>
+<td style="text-align: right;">0.399</td>
+<td style="text-align: right;">0.009</td>
+<td style="text-align: right;">0.061</td>
+</tr>
+<tr class="even">
+<td>Republican county (<code>redcty</code>)</td>
+<td style="text-align: right;">0.512</td>
+<td style="text-align: right;">0.507</td>
+<td style="text-align: right;">0.004</td>
+<td style="text-align: right;">0.366</td>
+</tr>
+<tr class="odd">
+<td>Nonprofit literacy score (<code>nonlit</code>)</td>
+<td style="text-align: right;">2.485</td>
+<td style="text-align: right;">2.453</td>
+<td style="text-align: right;">0.032</td>
+<td style="text-align: right;">0.089</td>
+</tr>
+<tr class="even">
+<td>Prior court cases (<code>cases</code>)</td>
+<td style="text-align: right;">1.499</td>
+<td style="text-align: right;">1.502</td>
+<td style="text-align: right;">-0.004</td>
+<td style="text-align: right;">0.733</td>
+</tr>
+<tr class="odd">
+<td>HPA score (<code>HPA</code>)</td>
+<td style="text-align: right;">59.597</td>
+<td style="text-align: right;">58.960</td>
+<td style="text-align: right;">0.637</td>
+<td style="text-align: right;">0.345</td>
+</tr>
+<tr class="even">
+<td>Years on file (<code>years</code>)</td>
+<td style="text-align: right;">6.078</td>
+<td style="text-align: right;">6.136</td>
+<td style="text-align: right;">-0.058</td>
+<td style="text-align: right;">0.270</td>
+</tr>
+<tr class="odd">
+<td>Female (<code>female</code>)</td>
+<td style="text-align: right;">0.275</td>
+<td style="text-align: right;">0.283</td>
+<td style="text-align: right;">-0.008</td>
+<td style="text-align: right;">0.079</td>
+</tr>
+<tr class="even">
+<td>Couple (<code>couple</code>)</td>
+<td style="text-align: right;">0.091</td>
+<td style="text-align: right;">0.093</td>
+<td style="text-align: right;">-0.002</td>
+<td style="text-align: right;">0.559</td>
+</tr>
+</tbody>
+</table>
+<p>The balance table supports the authors’ identification strategy. Since treatment and control groups look very similar on observed baseline characteristics, post-mailing differences in donations are more plausibly due to the fundraising letter rather than preexisting selection bias.</p>
+</section>
+<section id="table-2a-response-rates-and-donation-amounts" class="level3">
+<h3 class="anchored" data-anchor-id="table-2a-response-rates-and-donation-amounts">Table 2A: Response Rates And Donation Amounts</h3>
+<p>I next replicated the main descriptive statistics from Panel A of Table 2. The first comparison is the most important one in the paper: any match offer versus the control group.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 21%">
+<col style="width: 21%">
+<col style="width: 21%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Group</th>
+<th style="text-align: right;">N</th>
+<th style="text-align: right;">Response rate</th>
+<th style="text-align: right;">Average amount, unconditional</th>
+<th style="text-align: right;">Average amount, conditional on giving</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Control</td>
+<td style="text-align: right;">16,687</td>
+<td style="text-align: right;">0.0179</td>
+<td style="text-align: right;">0.8133</td>
+<td style="text-align: right;">45.5403</td>
+</tr>
+<tr class="even">
+<td>Treatment</td>
+<td style="text-align: right;">33,396</td>
+<td style="text-align: right;">0.0220</td>
+<td style="text-align: right;">0.9669</td>
+<td style="text-align: right;">43.8719</td>
+</tr>
+</tbody>
+</table>
+<p>This reproduces the core finding closely: the match offer increased the probability of giving from about 1.79 percent to 2.20 percent, and it also increased average revenue per mailed solicitation.</p>
+<p>The paper also argues that bigger match ratios did not create larger effects. The data support that conclusion:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 21%">
+<col style="width: 21%">
+<col style="width: 21%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Match ratio group</th>
+<th style="text-align: right;">N</th>
+<th style="text-align: right;">Response rate</th>
+<th style="text-align: right;">Average amount, unconditional</th>
+<th style="text-align: right;">Average amount, conditional on giving</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1:1</td>
+<td style="text-align: right;">11,133</td>
+<td style="text-align: right;">0.0207</td>
+<td style="text-align: right;">0.9367</td>
+<td style="text-align: right;">45.1429</td>
+</tr>
+<tr class="even">
+<td>2:1</td>
+<td style="text-align: right;">11,134</td>
+<td style="text-align: right;">0.0226</td>
+<td style="text-align: right;">1.0261</td>
+<td style="text-align: right;">45.3373</td>
+</tr>
+<tr class="odd">
+<td>3:1</td>
+<td style="text-align: right;">11,129</td>
+<td style="text-align: right;">0.0227</td>
+<td style="text-align: right;">0.9378</td>
+<td style="text-align: right;">41.2518</td>
+</tr>
+</tbody>
+</table>
+<p>The 2:1 and 3:1 groups do not clearly outperform the 1:1 group in a monotonic way. That is exactly the qualitative pattern Karlan and List emphasize.</p>
+<p>I also replicated the donation summaries by suggested amount:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 21%">
+<col style="width: 21%">
+<col style="width: 21%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Suggested amount treatment</th>
+<th style="text-align: right;">N</th>
+<th style="text-align: right;">Response rate</th>
+<th style="text-align: right;">Average amount, unconditional</th>
+<th style="text-align: right;">Average amount, conditional on giving</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>$25 ask</td>
+<td style="text-align: right;">8,350</td>
+<td style="text-align: right;">0.0216</td>
+<td style="text-align: right;">1.0600</td>
+<td style="text-align: right;">49.1722</td>
+</tr>
+<tr class="even">
+<td>$50 ask</td>
+<td style="text-align: right;">8,345</td>
+<td style="text-align: right;">0.0224</td>
+<td style="text-align: right;">0.8890</td>
+<td style="text-align: right;">39.6738</td>
+</tr>
+<tr class="odd">
+<td>$100 ask</td>
+<td style="text-align: right;">8,350</td>
+<td style="text-align: right;">0.0220</td>
+<td style="text-align: right;">0.9035</td>
+<td style="text-align: right;">41.0000</td>
+</tr>
+<tr class="even">
+<td>No ask string</td>
+<td style="text-align: right;">8,351</td>
+<td style="text-align: right;">0.0222</td>
+<td style="text-align: right;">1.0149</td>
+<td style="text-align: right;">45.8146</td>
+</tr>
+</tbody>
+</table>
+<p>These suggested-amount treatments move around a bit, but not in a clean way that would suggest a strong increasing effect from larger ask amounts.</p>
+</section>
+<section id="table-3-replicating-one-regression-column" class="level3">
+<h3 class="anchored" data-anchor-id="table-3-replicating-one-regression-column">Table 3: Replicating One Regression Column</h3>
+<p>For Table 3, the published treatment effect is best matched by a standard linear regression using the donation indicator as the dependent variable:</p>
+<pre class="text"><code>gave_i = alpha + beta * treatment_i + error_i</code></pre>
+<p>Replicating that column gives:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Term</th>
+<th style="text-align: right;">Estimate</th>
+<th style="text-align: right;">Std. error</th>
+<th style="text-align: right;">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Intercept</td>
+<td style="text-align: right;">0.017858</td>
+<td style="text-align: right;">0.001101</td>
+<td style="text-align: right;">&lt;0.001</td>
+</tr>
+<tr class="even">
+<td>Treatment</td>
+<td style="text-align: right;">0.004180</td>
+<td style="text-align: right;">0.001348</td>
+<td style="text-align: right;">0.0019</td>
+</tr>
+</tbody>
+</table>
+<p>The treatment coefficient implies that the matching offer increased giving by about 0.418 percentage points. Relative to the control mean of 1.786 percent, that is about a 23 percent increase in response.</p>
+<p>One interesting replication detail is that the provided Stata <code>do</code> file points Table 3 toward <code>dprobit</code>, but the reported column is much more consistent with an ordinary linear regression on <code>gave</code>. So the results seem to line up with the assignment note: the published table appears to have been generated from a linear model rather than a probit marginal effect table.</p>
+</section>
+</section>
+<section id="something-additional" class="level2">
+<h2 class="anchored" data-anchor-id="something-additional">Something Additional</h2>
+<section id="why-the-design-supports-a-causal-interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="why-the-design-supports-a-causal-interpretation">Why The Design Supports A Causal Interpretation</h3>
+<p>The strongest reason the paper can make a causal claim is randomized assignment. Each prior donor was assigned to receive a different solicitation letter before the donation decision was observed. That breaks the usual link between donor characteristics and treatment status. Table 1 then provides an empirical check on that logic: treatment and control groups are nearly identical on measured baseline variables. In this setting, the simple difference in means between treatment and control is an estimate of the intention-to-treat effect of receiving a matching appeal.</p>
+</section>
+<section id="graphing-part-of-table-2a" class="level3">
+<h3 class="anchored" data-anchor-id="graphing-part-of-table-2a">Graphing Part Of Table 2A</h3>
+<p>The paper mostly presents these results in tables, but a graph makes the pattern easier to see. The figure below shows the replicated response rates for the control group, the pooled treatment group, and the three match-ratio arms.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="table2a_response_rates.png" class="img-fluid figure-img"></p>
+<figcaption>Replication of Table 2A response rates</figcaption>
+</figure>
+</div>
+<p>The visual reinforces two points. First, any match beats the control group. Second, once a match is offered, moving from 1:1 to 2:1 or 3:1 does not produce a dramatic additional jump in response.</p>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>Using the provided replication data, I reproduced the paper’s central story. The experiment appears well randomized, matching offers increased the response rate and average revenue per solicitation, and larger match ratios did not generate meaningfully larger gains. The extra figure helps show that the main empirical pattern is not just statistically detectable; it is also easy to see directly in the grouped response rates.</p>
 
 
+</section>
 
-
-<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
-<div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-listing-date-sort="1776236400000" data-listing-file-modified-sort="1776316040917" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1476">
-<a href="./projects/hw1/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img loading='lazy' src="projects\hw1\index_files\figure-html\cell-4-output-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-A/B Testing a Call to Action
-</h5>
-<div class="card-text listing-description delink">
-A small website wants more newsletter subscribers, so it presents visitors with one of two alternate calls to action. CTA A says “Sign up for our newsletter here!” and CTA B…
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Hans Dong
-</div>
-<div class="listing-date">
-Apr 15, 2026
-</div>
-</div>
-</div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="1" data-listing-date-sort="1776841200000" data-listing-file-modified-sort="1776931902965" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1025">
-<a href="./projects/hw2/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img loading='lazy' src="projects\hw2\table2a_response_rates.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Replication of Karlan and List (2007)
-</h5>
-<div class="card-text listing-description delink">
-Dean Karlan and John A. List study whether matching grants increase charitable giving. In their field experiment, a nonprofit mailed fundraising letters to 50,083 prior…
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Hans Dong
-</div>
-<div class="listing-date">
-Apr 22, 2026
-</div>
-</div>
-</div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="2" data-listing-file-modified-sort="1775256132942">
-<a href="./projects/project1/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
-<div class="card-body post-contents">
-<div class="card-text listing-description delink">
-
-</div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-
-</div>
-</div>
-</div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="3" data-listing-file-modified-sort="1775255777460">
-<a href="./projects/project2/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
-<div class="card-body post-contents">
-<div class="card-text listing-description delink">
-
-</div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-
-</div>
-</div>
-</div>
-</div></a>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

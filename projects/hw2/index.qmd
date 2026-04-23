@@ -1,0 +1,111 @@
+---
+title: "Replication of Karlan and List (2007)"
+subtitle: "Does Price Matter in Charitable Giving? Evidence from a Large-Scale Natural Field Experiment"
+author: "Hans Dong"
+date: 4/22/2026
+format:
+  html:
+    toc: true
+---
+
+## Introduction
+
+Dean Karlan and John A. List study whether matching grants increase charitable giving. In their field experiment, a nonprofit mailed fundraising letters to 50,083 prior donors and randomly varied whether the letter mentioned a match, the size of the match ratio, and the suggested donation amount. Because households were randomly assigned to these mailings, differences in outcomes across groups can be interpreted causally rather than as simple correlation. The paper's main result is that offering any match increases giving, but larger match ratios such as 2:1 or 3:1 do not appear to outperform a 1:1 match.
+
+This post replicates three parts of the paper using the provided Stata replication data in `data/AERtables1-5.dta`:
+
+1. selected balance checks from Table 1,
+2. key summaries from Table 2A, and
+3. one Table 3 treatment-effect regression.
+
+I also add one extra item: a figure that turns part of Table 2A into a graph.
+
+Source paper: [American Economic Review article page](https://www.aeaweb.org/articles?id=10.1257/aer.97.5.1774).
+
+## Main Analysis
+
+### Table 1: Balance Between Treatment And Control
+
+Table 1 is meant to show that the randomization worked. I replicated several of the pretreatment covariates by comparing treatment and control means. The differences are tiny in substantive terms, and none are statistically significant at the 5 percent level.
+
+| Variable | Treatment mean | Control mean | Difference | p-value |
+|---|---:|---:|---:|---:|
+| Republican donor (`red0`) | 0.407 | 0.399 | 0.009 | 0.061 |
+| Republican county (`redcty`) | 0.512 | 0.507 | 0.004 | 0.366 |
+| Nonprofit literacy score (`nonlit`) | 2.485 | 2.453 | 0.032 | 0.089 |
+| Prior court cases (`cases`) | 1.499 | 1.502 | -0.004 | 0.733 |
+| HPA score (`HPA`) | 59.597 | 58.960 | 0.637 | 0.345 |
+| Years on file (`years`) | 6.078 | 6.136 | -0.058 | 0.270 |
+| Female (`female`) | 0.275 | 0.283 | -0.008 | 0.079 |
+| Couple (`couple`) | 0.091 | 0.093 | -0.002 | 0.559 |
+
+The balance table supports the authors' identification strategy. Since treatment and control groups look very similar on observed baseline characteristics, post-mailing differences in donations are more plausibly due to the fundraising letter rather than preexisting selection bias.
+
+### Table 2A: Response Rates And Donation Amounts
+
+I next replicated the main descriptive statistics from Panel A of Table 2. The first comparison is the most important one in the paper: any match offer versus the control group.
+
+| Group | N | Response rate | Average amount, unconditional | Average amount, conditional on giving |
+|---|---:|---:|---:|---:|
+| Control | 16,687 | 0.0179 | 0.8133 | 45.5403 |
+| Treatment | 33,396 | 0.0220 | 0.9669 | 43.8719 |
+
+This reproduces the core finding closely: the match offer increased the probability of giving from about 1.79 percent to 2.20 percent, and it also increased average revenue per mailed solicitation.
+
+The paper also argues that bigger match ratios did not create larger effects. The data support that conclusion:
+
+| Match ratio group | N | Response rate | Average amount, unconditional | Average amount, conditional on giving |
+|---|---:|---:|---:|---:|
+| 1:1 | 11,133 | 0.0207 | 0.9367 | 45.1429 |
+| 2:1 | 11,134 | 0.0226 | 1.0261 | 45.3373 |
+| 3:1 | 11,129 | 0.0227 | 0.9378 | 41.2518 |
+
+The 2:1 and 3:1 groups do not clearly outperform the 1:1 group in a monotonic way. That is exactly the qualitative pattern Karlan and List emphasize.
+
+I also replicated the donation summaries by suggested amount:
+
+| Suggested amount treatment | N | Response rate | Average amount, unconditional | Average amount, conditional on giving |
+|---|---:|---:|---:|---:|
+| $25 ask | 8,350 | 0.0216 | 1.0600 | 49.1722 |
+| $50 ask | 8,345 | 0.0224 | 0.8890 | 39.6738 |
+| $100 ask | 8,350 | 0.0220 | 0.9035 | 41.0000 |
+| No ask string | 8,351 | 0.0222 | 1.0149 | 45.8146 |
+
+These suggested-amount treatments move around a bit, but not in a clean way that would suggest a strong increasing effect from larger ask amounts.
+
+### Table 3: Replicating One Regression Column
+
+For Table 3, the published treatment effect is best matched by a standard linear regression using the donation indicator as the dependent variable:
+
+```text
+gave_i = alpha + beta * treatment_i + error_i
+```
+
+Replicating that column gives:
+
+| Term | Estimate | Std. error | p-value |
+|---|---:|---:|---:|
+| Intercept | 0.017858 | 0.001101 | <0.001 |
+| Treatment | 0.004180 | 0.001348 | 0.0019 |
+
+The treatment coefficient implies that the matching offer increased giving by about 0.418 percentage points. Relative to the control mean of 1.786 percent, that is about a 23 percent increase in response.
+
+One interesting replication detail is that the provided Stata `do` file points Table 3 toward `dprobit`, but the reported column is much more consistent with an ordinary linear regression on `gave`. So the results seem to line up with the assignment note: the published table appears to have been generated from a linear model rather than a probit marginal effect table.
+
+## Something Additional
+
+### Why The Design Supports A Causal Interpretation
+
+The strongest reason the paper can make a causal claim is randomized assignment. Each prior donor was assigned to receive a different solicitation letter before the donation decision was observed. That breaks the usual link between donor characteristics and treatment status. Table 1 then provides an empirical check on that logic: treatment and control groups are nearly identical on measured baseline variables. In this setting, the simple difference in means between treatment and control is an estimate of the intention-to-treat effect of receiving a matching appeal.
+
+### Graphing Part Of Table 2A
+
+The paper mostly presents these results in tables, but a graph makes the pattern easier to see. The figure below shows the replicated response rates for the control group, the pooled treatment group, and the three match-ratio arms.
+
+![Replication of Table 2A response rates](table2a_response_rates.png)
+
+The visual reinforces two points. First, any match beats the control group. Second, once a match is offered, moving from 1:1 to 2:1 or 3:1 does not produce a dramatic additional jump in response.
+
+## Conclusion
+
+Using the provided replication data, I reproduced the paper's central story. The experiment appears well randomized, matching offers increased the response rate and average revenue per solicitation, and larger match ratios did not generate meaningfully larger gains. The extra figure helps show that the main empirical pattern is not just statistically detectable; it is also easy to see directly in the grouped response rates.

@@ -7,6 +7,76 @@
     "text": "Download PDF file."
   },
   {
+    "objectID": "projects/hw2/index.html",
+    "href": "projects/hw2/index.html",
+    "title": "Replication of Karlan and List (2007)",
+    "section": "",
+    "text": "Dean Karlan and John A. List study whether matching grants increase charitable giving. In their field experiment, a nonprofit mailed fundraising letters to 50,083 prior donors and randomly varied whether the letter mentioned a match, the size of the match ratio, and the suggested donation amount. Because households were randomly assigned to these mailings, differences in outcomes across groups can be interpreted causally rather than as simple correlation. The paper’s main result is that offering any match increases giving, but larger match ratios such as 2:1 or 3:1 do not appear to outperform a 1:1 match.\nThis post replicates three parts of the paper using the provided Stata replication data in data/AERtables1-5.dta:\n\nselected balance checks from Table 1,\nkey summaries from Table 2A, and\none Table 3 treatment-effect regression.\n\nI also add one extra item: a figure that turns part of Table 2A into a graph.\nSource paper: American Economic Review article page."
+  },
+  {
+    "objectID": "projects/hw2/index.html#introduction",
+    "href": "projects/hw2/index.html#introduction",
+    "title": "Replication of Karlan and List (2007)",
+    "section": "",
+    "text": "Dean Karlan and John A. List study whether matching grants increase charitable giving. In their field experiment, a nonprofit mailed fundraising letters to 50,083 prior donors and randomly varied whether the letter mentioned a match, the size of the match ratio, and the suggested donation amount. Because households were randomly assigned to these mailings, differences in outcomes across groups can be interpreted causally rather than as simple correlation. The paper’s main result is that offering any match increases giving, but larger match ratios such as 2:1 or 3:1 do not appear to outperform a 1:1 match.\nThis post replicates three parts of the paper using the provided Stata replication data in data/AERtables1-5.dta:\n\nselected balance checks from Table 1,\nkey summaries from Table 2A, and\none Table 3 treatment-effect regression.\n\nI also add one extra item: a figure that turns part of Table 2A into a graph.\nSource paper: American Economic Review article page."
+  },
+  {
+    "objectID": "projects/hw2/index.html#main-analysis",
+    "href": "projects/hw2/index.html#main-analysis",
+    "title": "Replication of Karlan and List (2007)",
+    "section": "Main Analysis",
+    "text": "Main Analysis\n\nTable 1: Balance Between Treatment And Control\nTable 1 is meant to show that the randomization worked. I replicated several of the pretreatment covariates by comparing treatment and control means. The differences are tiny in substantive terms, and none are statistically significant at the 5 percent level.\n\n\n\nVariable\nTreatment mean\nControl mean\nDifference\np-value\n\n\n\n\nRepublican donor (red0)\n0.407\n0.399\n0.009\n0.061\n\n\nRepublican county (redcty)\n0.512\n0.507\n0.004\n0.366\n\n\nNonprofit literacy score (nonlit)\n2.485\n2.453\n0.032\n0.089\n\n\nPrior court cases (cases)\n1.499\n1.502\n-0.004\n0.733\n\n\nHPA score (HPA)\n59.597\n58.960\n0.637\n0.345\n\n\nYears on file (years)\n6.078\n6.136\n-0.058\n0.270\n\n\nFemale (female)\n0.275\n0.283\n-0.008\n0.079\n\n\nCouple (couple)\n0.091\n0.093\n-0.002\n0.559\n\n\n\nThe balance table supports the authors’ identification strategy. Since treatment and control groups look very similar on observed baseline characteristics, post-mailing differences in donations are more plausibly due to the fundraising letter rather than preexisting selection bias.\n\n\nTable 2A: Response Rates And Donation Amounts\nI next replicated the main descriptive statistics from Panel A of Table 2. The first comparison is the most important one in the paper: any match offer versus the control group.\n\n\n\n\n\n\n\n\n\n\nGroup\nN\nResponse rate\nAverage amount, unconditional\nAverage amount, conditional on giving\n\n\n\n\nControl\n16,687\n0.0179\n0.8133\n45.5403\n\n\nTreatment\n33,396\n0.0220\n0.9669\n43.8719\n\n\n\nThis reproduces the core finding closely: the match offer increased the probability of giving from about 1.79 percent to 2.20 percent, and it also increased average revenue per mailed solicitation.\nThe paper also argues that bigger match ratios did not create larger effects. The data support that conclusion:\n\n\n\n\n\n\n\n\n\n\nMatch ratio group\nN\nResponse rate\nAverage amount, unconditional\nAverage amount, conditional on giving\n\n\n\n\n1:1\n11,133\n0.0207\n0.9367\n45.1429\n\n\n2:1\n11,134\n0.0226\n1.0261\n45.3373\n\n\n3:1\n11,129\n0.0227\n0.9378\n41.2518\n\n\n\nThe 2:1 and 3:1 groups do not clearly outperform the 1:1 group in a monotonic way. That is exactly the qualitative pattern Karlan and List emphasize.\nI also replicated the donation summaries by suggested amount:\n\n\n\n\n\n\n\n\n\n\nSuggested amount treatment\nN\nResponse rate\nAverage amount, unconditional\nAverage amount, conditional on giving\n\n\n\n\n$25 ask\n8,350\n0.0216\n1.0600\n49.1722\n\n\n$50 ask\n8,345\n0.0224\n0.8890\n39.6738\n\n\n$100 ask\n8,350\n0.0220\n0.9035\n41.0000\n\n\nNo ask string\n8,351\n0.0222\n1.0149\n45.8146\n\n\n\nThese suggested-amount treatments move around a bit, but not in a clean way that would suggest a strong increasing effect from larger ask amounts.\n\n\nTable 3: Replicating One Regression Column\nFor Table 3, the published treatment effect is best matched by a standard linear regression using the donation indicator as the dependent variable:\ngave_i = alpha + beta * treatment_i + error_i\nReplicating that column gives:\n\n\n\nTerm\nEstimate\nStd. error\np-value\n\n\n\n\nIntercept\n0.017858\n0.001101\n&lt;0.001\n\n\nTreatment\n0.004180\n0.001348\n0.0019\n\n\n\nThe treatment coefficient implies that the matching offer increased giving by about 0.418 percentage points. Relative to the control mean of 1.786 percent, that is about a 23 percent increase in response.\nOne interesting replication detail is that the provided Stata do file points Table 3 toward dprobit, but the reported column is much more consistent with an ordinary linear regression on gave. So the results seem to line up with the assignment note: the published table appears to have been generated from a linear model rather than a probit marginal effect table."
+  },
+  {
+    "objectID": "projects/hw2/index.html#something-additional",
+    "href": "projects/hw2/index.html#something-additional",
+    "title": "Replication of Karlan and List (2007)",
+    "section": "Something Additional",
+    "text": "Something Additional\n\nWhy The Design Supports A Causal Interpretation\nThe strongest reason the paper can make a causal claim is randomized assignment. Each prior donor was assigned to receive a different solicitation letter before the donation decision was observed. That breaks the usual link between donor characteristics and treatment status. Table 1 then provides an empirical check on that logic: treatment and control groups are nearly identical on measured baseline variables. In this setting, the simple difference in means between treatment and control is an estimate of the intention-to-treat effect of receiving a matching appeal.\n\n\nGraphing Part Of Table 2A\nThe paper mostly presents these results in tables, but a graph makes the pattern easier to see. The figure below shows the replicated response rates for the control group, the pooled treatment group, and the three match-ratio arms.\n\n\n\nReplication of Table 2A response rates\n\n\nThe visual reinforces two points. First, any match beats the control group. Second, once a match is offered, moving from 1:1 to 2:1 or 3:1 does not produce a dramatic additional jump in response."
+  },
+  {
+    "objectID": "projects/hw2/index.html#conclusion",
+    "href": "projects/hw2/index.html#conclusion",
+    "title": "Replication of Karlan and List (2007)",
+    "section": "Conclusion",
+    "text": "Conclusion\nUsing the provided replication data, I reproduced the paper’s central story. The experiment appears well randomized, matching offers increased the response rate and average revenue per solicitation, and larger match ratios did not generate meaningfully larger gains. The extra figure helps show that the main empirical pattern is not just statistically detectable; it is also easy to see directly in the grouped response rates."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Hans (Jiaqi) Dong",
+    "section": "",
+    "text": "Welcome to my website!"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "bitcoin.html#current-market-context-april-2026",
+    "href": "bitcoin.html#current-market-context-april-2026",
+    "title": "Bitcoin Outlook: April 2026 – April 2027",
+    "section": "Current Market Context (April 2026)",
+    "text": "Current Market Context (April 2026)\nAs of today, Bitcoin is trading around $71,100. We are roughly two years post-2024 halving, moving into what historically is the “maturation” phase of the cycle.\n\nSupport Levels: Strong institutional floor established at $65,000.\nInstitutional Flow: Spot ETFs now account for a significant portion of daily liquidity.\nMacro Environment: Inflation is stabilizing, but central bank pivot expectations remain the primary driver for “risk-on” assets."
+  },
+  {
+    "objectID": "bitcoin.html#the-next-12-months-key-drivers",
+    "href": "bitcoin.html#the-next-12-months-key-drivers",
+    "title": "Bitcoin Outlook: April 2026 – April 2027",
+    "section": "The Next 12 Months: Key Drivers",
+    "text": "The Next 12 Months: Key Drivers\nThe path to April 2027 will likely be defined by three major factors:\n\nSupply Scarcity: The cumulative effect of the 2024 halving combined with corporate treasury adoption (the “MicroStrategy effect”).\nRegulatory Clarity: Global frameworks (like MiCA in Europe) are providing the “green light” for sovereign wealth fund entry.\nThe Halving Cycle: Historically, the year before a halving (2027 leads into 2028) often sees a mid-cycle consolidation before the pre-halving run-up."
+  },
+  {
+    "objectID": "bitcoin.html#price-prediction-april-2027",
+    "href": "bitcoin.html#price-prediction-april-2027",
+    "title": "Bitcoin Outlook: April 2026 – April 2027",
+    "section": "Price Prediction: April 2027",
+    "text": "Price Prediction: April 2027\nBased on current technical indicators and adoption curves, we anticipate a period of high-level consolidation with an upward bias.\n\n\n\nScenario\nTarget Price (Apr 2027)\nProbability\n\n\n\n\nBullish\n$120,000 - $145,000\n30%\n\n\nBase Case\n$85,000 - $95,000\n55%\n\n\nBearish\n$50,000 - $60,000\n15%\n\n\n\n\nBottom Line: We expect Bitcoin to break the six-figure barrier ($100k) briefly in late 2026, followed by a healthy correction to the $90k range by early 2027."
+  },
+  {
     "objectID": "projects/hw1/index.html",
     "href": "projects/hw1/index.html",
     "title": "A/B Testing a Call to Action",
@@ -77,45 +147,10 @@
     "text": "The Problem with Peeking\nClassical frequentist inference assumes the sample size is fixed before the test is performed. If the experiment is repeatedly checked after every 100 observations per group, then each check is another chance to produce a false positive. A single test at \\(\\alpha=0.05\\) has a 5% probability of a Type I error, but multiple looks inflate that error rate.\n\nnp.random.seed(24680)\nns = np.arange(100, 1001, 100)\nn_sims = 10000\nfalse_positives = 0\nfor _ in range(n_sims):\n    A_sim = np.random.binomial(1, 0.20, size=n)\n    B_sim = np.random.binomial(1, 0.20, size=n)\n    for m in ns:\n        A_sub = A_sim[:m]\n        B_sub = B_sim[:m]\n        theta_sub = A_sub.mean() - B_sub.mean()\n        se_sub = np.sqrt(\n            A_sub.mean() * (1 - A_sub.mean()) / m\n            + B_sub.mean() * (1 - B_sub.mean()) / m\n        )\n        p_sub = 2 * (1 - norm.cdf(abs(theta_sub / se_sub)))\n        if p_sub &lt; 0.05:\n            false_positives += 1\n            break\n\nempirical_rate = false_positives / n_sims\nprint(f\"Empirical false positive rate under peeking = {empirical_rate:.4%}\")\n\nEmpirical false positive rate under peeking = 19.5800%\n\n\nThis simulation demonstrates that repeatedly peeking increases the chance of incorrectly declaring a winner. In practice, if the goal is to keep the Type I error rate near 5%, then the decision rule must account for repeated looks or the experiment must be pre-specified to stop only once."
   },
   {
-    "objectID": "bitcoin.html#current-market-context-april-2026",
-    "href": "bitcoin.html#current-market-context-april-2026",
-    "title": "Bitcoin Outlook: April 2026 – April 2027",
-    "section": "Current Market Context (April 2026)",
-    "text": "Current Market Context (April 2026)\nAs of today, Bitcoin is trading around $71,100. We are roughly two years post-2024 halving, moving into what historically is the “maturation” phase of the cycle.\n\nSupport Levels: Strong institutional floor established at $65,000.\nInstitutional Flow: Spot ETFs now account for a significant portion of daily liquidity.\nMacro Environment: Inflation is stabilizing, but central bank pivot expectations remain the primary driver for “risk-on” assets."
-  },
-  {
-    "objectID": "bitcoin.html#the-next-12-months-key-drivers",
-    "href": "bitcoin.html#the-next-12-months-key-drivers",
-    "title": "Bitcoin Outlook: April 2026 – April 2027",
-    "section": "The Next 12 Months: Key Drivers",
-    "text": "The Next 12 Months: Key Drivers\nThe path to April 2027 will likely be defined by three major factors:\n\nSupply Scarcity: The cumulative effect of the 2024 halving combined with corporate treasury adoption (the “MicroStrategy effect”).\nRegulatory Clarity: Global frameworks (like MiCA in Europe) are providing the “green light” for sovereign wealth fund entry.\nThe Halving Cycle: Historically, the year before a halving (2027 leads into 2028) often sees a mid-cycle consolidation before the pre-halving run-up."
-  },
-  {
-    "objectID": "bitcoin.html#price-prediction-april-2027",
-    "href": "bitcoin.html#price-prediction-april-2027",
-    "title": "Bitcoin Outlook: April 2026 – April 2027",
-    "section": "Price Prediction: April 2027",
-    "text": "Price Prediction: April 2027\nBased on current technical indicators and adoption curves, we anticipate a period of high-level consolidation with an upward bias.\n\n\n\nScenario\nTarget Price (Apr 2027)\nProbability\n\n\n\n\nBullish\n$120,000 - $145,000\n30%\n\n\nBase Case\n$85,000 - $95,000\n55%\n\n\nBearish\n$50,000 - $60,000\n15%\n\n\n\n\nBottom Line: We expect Bitcoin to break the six-figure barrier ($100k) briefly in late 2026, followed by a healthy correction to the $90k range by early 2027."
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Hans (Jiaqi) Dong",
-    "section": "",
-    "text": "Welcome to my website!"
-  },
-  {
     "objectID": "projects.html",
     "href": "projects.html",
     "title": "My Projects",
     "section": "",
-    "text": "A/B Testing a Call to Action\n\n\n\n\n\n\nHans Dong\n\n\nApr 15, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "A/B Testing a Call to Action\n\n\n\n\n\n\nHans Dong\n\n\nApr 15, 2026\n\n\n\n\n\n\n\n\n\n\n\nReplication of Karlan and List (2007)\n\n\n\n\n\n\nHans Dong\n\n\nApr 22, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
   }
 ]
