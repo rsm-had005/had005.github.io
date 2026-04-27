@@ -2,4 +2,10 @@
 title: "About"
 ---
 
-About this site
+## About This Site
+
+This website was created to showcase academic projects, coursework, and professional development.
+
+It includes examples of data analysis, class assignments, and personal work completed throughout the program.
+
+Thank you for visiting this site.
