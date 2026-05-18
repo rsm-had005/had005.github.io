@@ -1,0 +1,371 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: A/B Testing a Call to Action\n",
+        "subtitle: \"Simulating Key Ideas from Classical Frequentist Statistics\"\n",
+        "author: \"Hans Dong\"\n",
+        "date: 04/15/2026\n",
+        "format: html\n",
+        "---\n",
+        "\n",
+        "## Introduction\n",
+        "\n",
+        "A small website wants more newsletter subscribers, so it presents visitors with one of two alternate calls to action.\n",
+        "CTA A says \"Sign up for our newsletter here!\" and CTA B says \"Stay up to date by signing up!\".\n",
+        "To find out which phrase works better, the site runs an A/B test: visitors are randomly assigned to see one of the two CTAs, and we compare the sign-up rates between the two groups.\n",
+        "This experiment is a simple way to use data to choose the better message instead of guessing.\n",
+        "\n",
+        "## The A/B Test as a Statistical Problem\n",
+        "\n",
+        "Each visitor either signs up or does not, so it is natural to model the outcome as a Bernoulli random variable.\n",
+        "Visitors who see CTA A are assumed to sign up with probability $\\pi_A$, and visitors who see CTA B are assumed to sign up with probability $\\pi_B$.\n",
+        "The parameter we care about is the difference in sign-up rates,\n",
+        "\n",
+        "$$\n",
+        "\\theta = \\pi_A - \\pi_B.\n",
+        "$$\n",
+        "\n",
+        "Our estimator is the difference in sample means,\n",
+        "\n",
+        "$$\n",
+        "\\hat{\\theta} = \\bar{X}_A - \\bar{X}_B,\n",
+        "$$\n",
+        "\n",
+        "where $\\bar{X}_A$ is the proportion of sign-ups in group A and $\\bar{X}_B$ is the proportion in group B.\n",
+        "Because each observation is 0 or 1, the sample mean equals the sample proportion.\n",
+        "\n",
+        "## Simulating Data\n",
+        "\n",
+        "In practice we would not know the true values of $\\pi_A$ and $\\pi_B$.\n",
+        "For this exercise, we set them to $\\pi_A = 0.22$ and $\\pi_B = 0.18$ so we can study estimator behavior when the truth is known.\n",
+        "The true difference is therefore $\\theta = 0.04$."
+      ],
+      "id": "5a3f83de"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import numpy as np\n",
+        "import pandas as pd\n",
+        "import matplotlib.pyplot as plt\n",
+        "from scipy.stats import norm\n",
+        "import statsmodels.formula.api as smf\n",
+        "\n",
+        "plt.style.use('seaborn-v0_8')\n",
+        "\n",
+        "np.random.seed(12345)\n",
+        "pi_A = 0.22\n",
+        "pi_B = 0.18\n",
+        "n = 1000\n",
+        "A = np.random.binomial(1, pi_A, size=n)\n",
+        "B = np.random.binomial(1, pi_B, size=n)\n",
+        "\n",
+        "theta_true = pi_A - pi_B\n",
+        "pi_A_hat = A.mean()\n",
+        "pi_B_hat = B.mean()\n",
+        "theta_hat = pi_A_hat - pi_B_hat\n",
+        "\n",
+        "summary = pd.DataFrame({\n",
+        "    'Group': ['A', 'B'],\n",
+        "    'Sample size': [n, n],\n",
+        "    'Observed proportion': [pi_A_hat, pi_B_hat]\n",
+        "})\n",
+        "print(summary.to_markdown(index=False))\n",
+        "print(f\"\\nObserved difference = {theta_hat:.4f}\")"
+      ],
+      "id": "5ffd8457",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "The table above reports the observed sign-up proportions in each group from the simulated data.\n",
+        "Because the A group was generated with a higher true probability, the observed difference is positive and close to the true effect of 0.04.\n",
+        "\n",
+        "## The Law of Large Numbers\n",
+        "\n",
+        "The Law of Large Numbers tells us that as the sample size increases, the sample mean converges to the population mean.\n",
+        "For our A/B test, that means the difference in observed sign-up rates should settle around the true difference $\\theta$."
+      ],
+      "id": "f7ca84c5"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "differences = A - B\n",
+        "cumulative_mean = np.cumsum(differences) / np.arange(1, n + 1)"
+      ],
+      "id": "c07bc874",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "plt.figure(figsize=(8, 4))\n",
+        "plt.plot(np.arange(1, n + 1), cumulative_mean, color='tab:blue', linewidth=1.8)\n",
+        "plt.axhline(theta_true, color='tab:red', linestyle='--', linewidth=1.8, label=f'True difference = {theta_true:.2f}')\n",
+        "plt.xlabel('Number of paired observations')\n",
+        "plt.ylabel('Cumulative average of A - B')\n",
+        "plt.title('Law of Large Numbers: running average of the difference')\n",
+        "plt.legend()\n",
+        "plt.grid(alpha=0.25)\n",
+        "plt.tight_layout()\n",
+        "plt.show()"
+      ],
+      "id": "d8045242",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "The line begins fairly noisy and then converges around the true difference of 0.04.\n",
+        "This visual confirms that the estimator becomes more stable as the sample size grows.\n",
+        "\n",
+        "## Bootstrap Standard Errors\n",
+        "\n",
+        "To understand how precise our point estimate is, we use the bootstrap to estimate the standard error of $\\hat{\\theta}$.\n",
+        "The bootstrap draws repeated resamples with replacement from the observed data and measures how much the estimated difference varies across resamples."
+      ],
+      "id": "45d8f9f7"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "np.random.seed(67890)\n",
+        "B_boot = 1000\n",
+        "boot_estimates = np.empty(B_boot)\n",
+        "for i in range(B_boot):\n",
+        "    A_star = np.random.choice(A, size=n, replace=True)\n",
+        "    B_star = np.random.choice(B, size=n, replace=True)\n",
+        "    boot_estimates[i] = A_star.mean() - B_star.mean()\n",
+        "\n",
+        "boot_se = boot_estimates.std(ddof=1)\n",
+        "se_analytic = np.sqrt(\n",
+        "    pi_A_hat * (1 - pi_A_hat) / n\n",
+        "    + pi_B_hat * (1 - pi_B_hat) / n\n",
+        ")\n",
+        "ci_lower, ci_upper = theta_hat + norm.ppf([0.025, 0.975]) * boot_se\n",
+        "\n",
+        "boot_results = pd.DataFrame({\n",
+        "    'Statistic': ['Bootstrap SE', 'Analytical SE', '95% CI lower', '95% CI upper'],\n",
+        "    'Value': [boot_se, se_analytic, ci_lower, ci_upper]\n",
+        "})\n",
+        "print(boot_results.to_markdown(index=False))"
+      ],
+      "id": "f324c53b",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "The bootstrap standard error is very close to the analytical formula for the difference of two independent proportions.\n",
+        "This agreement gives us confidence that both approaches are estimating the same sampling variability.\n",
+        "The 95% confidence interval summarizes the plausible range for the true difference $\\theta$ given the observed data.\n",
+        "\n",
+        "## The Central Limit Theorem\n",
+        "\n",
+        "The Central Limit Theorem implies that the sampling distribution of $\\hat{\\theta}$ becomes approximately Normal as sample size increases.\n",
+        "To demonstrate this, we simulate the distribution of $\\hat{\\theta}$ for four different sample sizes and compare the resulting histograms."
+      ],
+      "id": "e8cbc402"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "plt.figure(figsize=(10, 8))\n",
+        "ns = [25, 50, 100, 500]\n",
+        "for i, m in enumerate(ns):\n",
+        "    estimates = np.empty(1000)\n",
+        "    for j in range(1000):\n",
+        "        A_sample = np.random.binomial(1, pi_A, size=m)\n",
+        "        B_sample = np.random.binomial(1, pi_B, size=m)\n",
+        "        estimates[j] = A_sample.mean() - B_sample.mean()\n",
+        "\n",
+        "    ax = plt.subplot(2, 2, i + 1)\n",
+        "    ax.hist(estimates, bins=20, density=True, color='tab:blue', edgecolor='white')\n",
+        "    ax.set_title(f'n = {m}')\n",
+        "    ax.set_xlim(-0.1, 0.15)\n",
+        "    ax.axvline(theta_true, color='tab:red', linestyle='--', linewidth=1)\n",
+        "    if i in [2, 3]:\n",
+        "        ax.set_xlabel('Estimated difference')\n",
+        "    if i in [0, 2]:\n",
+        "        ax.set_ylabel('Density')\n",
+        "\n",
+        "plt.suptitle('Sampling distribution of $\\\\hat{\\\\theta}$ for different sample sizes', y=0.98)\n",
+        "plt.tight_layout(rect=[0, 0, 1, 0.95])\n",
+        "plt.show()"
+      ],
+      "id": "7c1ff5f4",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "At $n=25$ the sampling distribution is rough and uneven, but by $n=500$ it becomes much smoother and bell-shaped.\n",
+        "This pattern illustrates the CLT: the sampling distribution approaches Normality as sample size increases.\n",
+        "\n",
+        "## Hypothesis Testing\n",
+        "\n",
+        "We now use the simulated data to test the null hypothesis\n",
+        "\n",
+        "$$\n",
+        "H_0: \\theta = 0 \\quad\\text{vs.}\\quad H_1: \\theta \\neq 0.\n",
+        "$$\n",
+        "\n",
+        "We standardize the observed difference using the estimated standard error,\n",
+        "\n",
+        "$$\n",
+        "z = \\frac{\\hat{\\theta} - 0}{SE(\\hat{\\theta})}.\n",
+        "$$\n",
+        "\n",
+        "Because of the CLT, this $z$ statistic is approximately standard Normal under the null.\n",
+        "This allows us to compute a two-sided p-value."
+      ],
+      "id": "6bacba8e"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "test_results = pd.DataFrame({\n",
+        "    'Measure': ['Observed difference', 'Standard error', 'z statistic', 'Two-sided p-value'],\n",
+        "    'Value': [theta_hat, se_analytic, theta_hat / se_analytic, 2 * (1 - norm.cdf(abs(theta_hat / se_analytic)))]\n",
+        "})\n",
+        "print(test_results.to_markdown(index=False))"
+      ],
+      "id": "72629ac8",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Although introductory statistics often calls this a \"t-test,\" our setting is closer to a z-test.\n",
+        "The data are Bernoulli rather than Normal, and the CLT provides an approximate Normal distribution for the standardized estimator.\n",
+        "For large samples the standard Normal and the t-distribution are nearly identical, which is why the terminology is often used loosely.\n",
+        "\n",
+        "The p-value above shows how surprising the observed difference would be if the two CTAs truly had equal sign-up rates.\n",
+        "A small p-value would indicate evidence against $H_0$.\n",
+        "\n",
+        "## The T-Test as a Regression\n",
+        "\n",
+        "A simple regression with an indicator variable produces the same comparison as the two-sample difference in means.\n",
+        "We stack the group data into one dataset with outcome $Y_i$ and treatment indicator $D_i$ (1 for A, 0 for B):\n",
+        "\n",
+        "$$\n",
+        "Y_i = \\beta_0 + \\beta_1 D_i + \\varepsilon_i.\n",
+        "$$\n",
+        "\n",
+        "In this model, $\\beta_0$ estimates the mean of group B and $\\beta_1$ estimates the difference $\\pi_A - \\pi_B$."
+      ],
+      "id": "f4abc00b"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "combined = pd.DataFrame({\n",
+        "    'Y': np.concatenate([A, B]),\n",
+        "    'D': np.concatenate([np.ones(n), np.zeros(n)]),\n",
+        "})\n",
+        "model = smf.ols('Y ~ D', data=combined).fit()\n",
+        "reg_results = pd.DataFrame({\n",
+        "    'Term': ['Intercept', 'D'],\n",
+        "    'Coefficient': model.params.values,\n",
+        "    'Std. error': model.bse.values,\n",
+        "    't value': model.tvalues.values,\n",
+        "    'p-value': model.pvalues.values\n",
+        "})\n",
+        "print(reg_results.to_markdown(index=False))"
+      ],
+      "id": "5f6424dd",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "The coefficient on $D$ is the same estimate as the difference in group proportions.\n",
+        "The regression standard error and p-value are also very close to the values from the two-sample approach.\n",
+        "This equivalence is useful because it means the same regression framework can be extended to include controls, interactions, or additional treatment arms.\n",
+        "\n",
+        "## The Problem with Peeking\n",
+        "\n",
+        "Classical frequentist inference assumes the sample size is fixed before the test is performed.\n",
+        "If the experiment is repeatedly checked after every 100 observations per group, then each check is another chance to produce a false positive.\n",
+        "A single test at $\\alpha=0.05$ has a 5% probability of a Type I error, but multiple looks inflate that error rate."
+      ],
+      "id": "06942041"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "np.random.seed(24680)\n",
+        "ns = np.arange(100, 1001, 100)\n",
+        "n_sims = 10000\n",
+        "false_positives = 0\n",
+        "for _ in range(n_sims):\n",
+        "    A_sim = np.random.binomial(1, 0.20, size=n)\n",
+        "    B_sim = np.random.binomial(1, 0.20, size=n)\n",
+        "    for m in ns:\n",
+        "        A_sub = A_sim[:m]\n",
+        "        B_sub = B_sim[:m]\n",
+        "        theta_sub = A_sub.mean() - B_sub.mean()\n",
+        "        se_sub = np.sqrt(\n",
+        "            A_sub.mean() * (1 - A_sub.mean()) / m\n",
+        "            + B_sub.mean() * (1 - B_sub.mean()) / m\n",
+        "        )\n",
+        "        p_sub = 2 * (1 - norm.cdf(abs(theta_sub / se_sub)))\n",
+        "        if p_sub < 0.05:\n",
+        "            false_positives += 1\n",
+        "            break\n",
+        "\n",
+        "empirical_rate = false_positives / n_sims\n",
+        "print(f\"Empirical false positive rate under peeking = {empirical_rate:.4%}\")"
+      ],
+      "id": "c039f9bf",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "This simulation demonstrates that repeatedly peeking increases the chance of incorrectly declaring a winner.\n",
+        "In practice, if the goal is to keep the Type I error rate near 5%, then the decision rule must account for repeated looks or the experiment must be pre-specified to stop only once."
+      ],
+      "id": "d2e196b9"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "C:\\Users\\25054\\AppData\\Roaming\\Python\\share\\jupyter\\kernels\\python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
